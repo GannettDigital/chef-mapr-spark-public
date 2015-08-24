@@ -1,28 +1,28 @@
-# encoding: utf-8
 require 'chefspec'
-require 'spec_helper'
-require 'chefspec/berkshelf'
 
 describe 'mapr-spark::default' do
-  let('chef_run') do
-    ChefSpec::SoloRunner.new do |node|
-    end.converge(described_recipe)
+  let(:chef_run) {
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.6').converge(described_recipe)
+  }
+
+  before do
+    stub_command('hadoop fs -stat /apps/spark').and_return(false)
   end
-  
-  it 'installs package scala' do
-    expect(chef_run).to install_package('http://www.scala-lang.org/files/archive/scala-2.10.4.rpm')
-  end  
-  
-  it 'installs package mapr-spark' do
+
+  it 'should have installed "mapr-spark"' do
     expect(chef_run).to install_package('mapr-spark')
   end
-  
-  #ruby_block "Is Spark installed" do
-  it 'check if spark was installeds' do
-    expect(chef_run).to run_ruby_block('Is Spark installed')
+
+  it 'should have installed "mapr-spark-historyserver"' do
+    expect(chef_run).to install_package('mapr-spark-historyserver')
   end
-  
-  it 'should edit yarn-site.xml' do
-    expect(chef_run).to run_ruby_block('Add Property to yarn-site XML')
+
+  it 'should configure maprfs correctly' do
+    expect(chef_run).to run_execute('hadoop fs -mkdir /apps/spark')
+    expect(chef_run).to run_execute('hadoop fs -chmod 777 /apps/spark')
+  end
+
+  it 'should run configure.sh -R' do
+    expect(chef_run).to run_execute('/opt/mapr/server/configure.sh -R')
   end
 end

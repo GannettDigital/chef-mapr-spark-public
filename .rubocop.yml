@@ -38,7 +38,3 @@ Style/SingleSpaceBeforeFirstArg:
 # Only enforce a wordlist for 5 or longer lists.
 Style/WordArray:
   MinSize: 5
-  
-# Avoid more than `Max` levels of nesting.
-BlockNesting:
-  Max: 5  
