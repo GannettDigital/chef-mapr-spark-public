@@ -1,4 +1,7 @@
 require 'chefspec'
+require 'chefspec/berkshelf'
+require 'spec_helper'
+
 
 describe 'mapr-spark::default' do
   let(:chef_run) {
