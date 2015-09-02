@@ -1,0 +1,6 @@
+{
+  "id": "hive",
+  "mysql_user": "hiveuser",
+  "mysql_password": "password2", 
+  "mysql_root_password": "rootpassword"
+}

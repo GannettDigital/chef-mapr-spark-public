@@ -18,14 +18,12 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mapr_installation::default]
-      - recipe[mapr-spark::default]
+      - role[mapr-node]
     attributes:
-      java:
-        version: 'java-1.8.0-openjdk-devel'
-        home: '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/'
       mapr:
-        cldb: ['node-1']
-        zk: ['node-1']
-        rm: ['node-1']
-        hs: 'node-1'
+        cldb: '*'
+        zk: '*'
+        rm: '*'
+        hs: '*'
+      ssh_keys:
+        mapr: ['mapr']
