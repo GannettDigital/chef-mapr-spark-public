@@ -12,7 +12,7 @@ driver:
   user_data: <%= ENV['USER_DATA_PATH'] %>
   block_device_mappings:
     - ebs_device_name: /dev/sdb
-      ebs_volume_size: 5
+      ebs_volume_size: 10
       ebs_delete_on_termination: true
 
 provisioner:
