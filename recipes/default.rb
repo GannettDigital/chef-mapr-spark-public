@@ -1,7 +1,12 @@
-package 'mapr-spark'
-package 'mapr-spark-historyserver'
+package 'mapr-spark' do
+  version node['mapr']['versions']['spark']
+end
 
-execute 'hadoop fs -mkdir /apps/spark' do
+package 'mapr-spark-historyserver' do
+  version node['mapr']['versions']['spark']
+end
+
+execute 'hadoop fs -mkdir -p /apps/spark' do
   not_if 'hadoop fs -stat /apps/spark'
 end
 
