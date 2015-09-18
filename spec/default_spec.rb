@@ -21,7 +21,7 @@ describe 'mapr-spark::default' do
   end
 
   it 'should configure maprfs correctly' do
-    expect(chef_run).to run_execute('hadoop fs -mkdir /apps/spark')
+    expect(chef_run).to run_execute('hadoop fs -mkdir -p /apps/spark')
     expect(chef_run).to run_execute('hadoop fs -chmod 777 /apps/spark')
   end
 
